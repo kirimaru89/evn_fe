@@ -1,21 +1,108 @@
-# Next.js template
+# MSM Portal Frontend
 
-This is a Next.js template with shadcn/ui.
+Frontend repository for MSM Portal — EVNNPC NPSC.
 
-## Adding components
+Stack:
 
-To add components to your app, run the following command:
+- Next.js App Router
+- TypeScript
+- TailwindCSS
+- shadcn/ui
+- Project DS wrapper layer
 
-```bash
-npx shadcn@latest add button
+## Active Modules
+
+```txt
+admin
+portal-msm
+thi-nghiem-cbm
 ```
 
-This will place the ui components in the `components` directory.
+Module folders use Vietnamese slugs without accents. UI labels should use the full Vietnamese business names.
 
-## Using components
+## Key Documents
 
-To use the components in your app, import them as follows:
+```txt
+AGENTS.md
+CONTRIBUTING.md
+docs/architecture/PROJECT_STRUCTURE.md
+docs/architecture/DESIGN_SYSTEM.md
+docs/templates/FEATURE_SPEC_TEMPLATE.md
+```
 
-```tsx
-import { Button } from "@/components/ui/button";
+Use `AGENTS.md` for project-specific AI agent rules.
+
+Use `CONTRIBUTING.md` for the AI-assisted FE workflow.
+
+## Feature Spec Workflow
+
+Feature Specs are synced locally into:
+
+```txt
+.specs/<module>/<FEATURE-CODE>.md
+```
+
+Example:
+
+```txt
+.specs/thi-nghiem-cbm/CBM-UC-01.md
+```
+
+`.specs/` is a local cache and is ignored by Git.
+
+Standard workflow:
+
+```txt
+1. Sync Feature Spec
+2. Verify Feature Spec
+3. Implement Feature Spec
+4. Review Feature Diff
+```
+
+Local workspace skills:
+
+```txt
+verify-feature-spec
+implement-feature-spec
+review-feature-diff
+vercel-react-best-practices
+```
+
+## Component Rules
+
+Before creating a new UI component, inspect and reuse in this order:
+
+```txt
+components/ds/
+components/shared/
+components/ui/
+components/<module>/
+```
+
+`components/ui/` contains raw shadcn primitives.
+
+`components/ds/` contains project DS wrappers and should be preferred.
+
+`components/shared/` contains shared enterprise components.
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run dev server:
+
+```bash
+npm run dev
+```
+
+Validate:
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
 ```
