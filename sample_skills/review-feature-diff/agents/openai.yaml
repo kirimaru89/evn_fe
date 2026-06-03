@@ -1,0 +1,3 @@
+display_name: Review Feature Diff
+short_description: Review implementation diffs against Feature Spec and project rules.
+default_prompt: Review this implementation diff against the Feature Spec, AGENTS.md, project structure, DS rules, and React/Next.js best practices.

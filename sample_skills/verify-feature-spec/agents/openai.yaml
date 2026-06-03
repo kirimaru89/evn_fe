@@ -1,0 +1,3 @@
+display_name: Verify Feature Spec
+short_description: Check whether a local Feature Spec is ready for implementation.
+default_prompt: Verify this Feature Spec and report readiness, blocking issues, warnings, and assumptions.

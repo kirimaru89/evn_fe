@@ -1,0 +1,3 @@
+display_name: Implement Feature Spec
+short_description: Build a verified Feature Spec into the Next.js frontend.
+default_prompt: Implement this Feature Spec using AGENTS.md, project structure, DS wrappers, existing components, and React/Next.js best practices.
