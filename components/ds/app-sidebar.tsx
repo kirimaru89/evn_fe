@@ -18,6 +18,7 @@ import {
   ArrowRight01Icon,
   LayoutDashboard,
   Settings,
+  TestTubeIcon,
   Users,
 } from "@hugeicons/core-free-icons"
 
@@ -76,6 +77,16 @@ const navigationGroups = [
       },
       { title: "Cài đặt", url: "/demo/settings", icon: Settings },
       { title: "Báo cáo", url: "/demo/reports", icon: ChartBar },
+    ],
+  },
+  {
+    label: "Thí nghiệm CBM",
+    items: [
+      {
+        title: "Kế hoạch CBM",
+        url: "/thi-nghiem-cbm/ke-hoach-cbm",
+        icon: TestTubeIcon,
+      },
     ],
   },
 ] as const

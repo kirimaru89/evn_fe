@@ -106,13 +106,43 @@ function formatPaginationRange({
   return `Hiển thị ${from}-${to} trên ${total}`
 }
 
+import type { DSStatus } from "@/components/ds"
+import type { CbmPlanSource, CbmPlanStatus } from "@/types/thi-nghiem-cbm/cbm-plan"
+
+type CbmPlanStatusConfig = {
+  label: string
+  tone: DSStatus
+}
+
+const CBM_PLAN_STATUS_CONFIG: Record<CbmPlanStatus, CbmPlanStatusConfig> = {
+  draft: { label: "Nháp", tone: "neutral" },
+  pendingDirectorApproval: { label: "Chờ GĐXN duyệt", tone: "pending" },
+  approved: { label: "Đã duyệt", tone: "success" },
+  rejected: { label: "Từ chối", tone: "warning" },
+  transferredToExecution: { label: "Đã chuyển sang thực hiện", tone: "active" },
+}
+
+const CBM_PLAN_SOURCE_LABELS: Record<CbmPlanSource, string> = {
+  manual: "Tạo mới",
+  importExcel: "Import Excel",
+  pmisSync: "Đồng bộ PMIS",
+}
+
+function getCbmPlanStatusConfig(status: CbmPlanStatus): CbmPlanStatusConfig {
+  return CBM_PLAN_STATUS_CONFIG[status]
+}
+
 export {
   CBM_PLAN_DEFAULT_PAGE_SIZE,
+  CBM_PLAN_SOURCE_LABELS,
+  CBM_PLAN_STATUS_CONFIG,
   formatApiDate,
   formatDisplayDate,
   formatDisplayDateTime,
   formatPaginationRange,
   getBaseOnePaginationRange,
+  getCbmPlanStatusConfig,
   getCurrentMonthDateRange,
   parseApiDate,
 }
+export type { CbmPlanStatusConfig }
