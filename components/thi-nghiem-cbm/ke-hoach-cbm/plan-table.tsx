@@ -118,7 +118,8 @@ function PlanTable({
         render: (_value, row) => (
           <button
             type="button"
-            className="font-medium text-primary underline-offset-4 hover:underline"
+            className="block max-w-40 truncate font-medium text-primary underline-offset-4 hover:underline"
+            title={row.deviceCode}
             onClick={() => onViewDetail(row)}
           >
             {row.deviceCode}
@@ -129,18 +130,36 @@ function PlanTable({
         key: "deviceName",
         header: "Tên thiết bị",
         accessor: "deviceName",
+        render: (_value, row) => (
+          <span className="block max-w-56 truncate" title={row.deviceName}>
+            {row.deviceName}
+          </span>
+        ),
       },
       {
         key: "locationName",
         header: "Vị trí",
         accessor: "locationName",
         hideable: true,
+        render: (_value, row) => (
+          <span className="block max-w-44 truncate" title={row.locationName}>
+            {row.locationName}
+          </span>
+        ),
       },
       {
         key: "managingUnitName",
         header: "Đơn vị quản lý",
         accessor: "managingUnitName",
         hideable: true,
+        render: (_value, row) => (
+          <span
+            className="block max-w-44 truncate"
+            title={row.managingUnitName}
+          >
+            {row.managingUnitName}
+          </span>
+        ),
       },
       {
         key: "executionDate",
