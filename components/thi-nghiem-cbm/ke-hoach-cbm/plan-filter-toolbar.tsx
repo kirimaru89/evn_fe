@@ -1,7 +1,5 @@
 "use client"
 
-import * as React from "react"
-
 import {
   DSDateRangeFilter,
   DSFilterBar,
@@ -29,6 +27,7 @@ type PlanFilterToolbarProps = {
   keyword?: string
   executionDateFrom?: string
   executionDateTo?: string
+  datePreset: string
   status?: CbmPlanStatus | "all"
   managingUnitId?: string
   locationId?: string
@@ -37,6 +36,7 @@ type PlanFilterToolbarProps = {
   isLoading?: boolean
   dateRangeError?: string
   onKeywordChange: (value: string) => void
+  onDatePresetChange: (preset: string) => void
   onDateRangeChange: (from: string | undefined, to: string | undefined) => void
   onStatusChange: (value: string) => void
   onUnitChange: (value: string) => void
@@ -58,6 +58,7 @@ function PlanFilterToolbar({
   keyword = "",
   executionDateFrom,
   executionDateTo,
+  datePreset,
   status = "all",
   managingUnitId = "",
   locationId = "",
@@ -66,19 +67,14 @@ function PlanFilterToolbar({
   isLoading,
   dateRangeError,
   onKeywordChange,
+  onDatePresetChange,
   onDateRangeChange,
   onStatusChange,
   onUnitChange,
   onLocationChange,
   onReset,
 }: PlanFilterToolbarProps) {
-  const [datePreset, setDatePreset] = React.useState("custom")
-
   const customRange = toFilterRange(executionDateFrom, executionDateTo)
-
-  const handleDatePresetChange = (value: string) => {
-    setDatePreset(value)
-  }
 
   const handleCustomRangeChange = (range: DSDateRangeFilterRange) => {
     const from = range.from ? formatApiDate(range.from) : undefined
@@ -110,7 +106,7 @@ function PlanFilterToolbar({
           <DSDateRangeFilter
             label="Ngày thực hiện"
             value={datePreset}
-            onValueChange={handleDatePresetChange}
+            onValueChange={onDatePresetChange}
             customRange={customRange}
             onCustomRangeChange={handleCustomRangeChange}
           />

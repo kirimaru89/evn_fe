@@ -17,8 +17,47 @@ import {
   type DSBulkAction,
 } from "@/components/ds"
 import { useCbmPlanList } from "@/hooks/thi-nghiem-cbm/use-cbm-plan-list"
+import {
+  formatApiDate,
+} from "@/lib/thi-nghiem-cbm/cbm-plan-list"
 import { PlanFilterToolbar } from "./plan-filter-toolbar"
 import { PlanTable } from "./plan-table"
+
+function presetToDateRange(
+  preset: string
+): { from: string; to: string } | null {
+  const today = new Date()
+  const year = today.getFullYear()
+
+  switch (preset) {
+    case "today": {
+      const d = formatApiDate(today)
+      return { from: d, to: d }
+    }
+    case "last-7-days": {
+      const from = new Date(today)
+      from.setDate(today.getDate() - 6)
+      return { from: formatApiDate(from), to: formatApiDate(today) }
+    }
+    case "last-30-days": {
+      const from = new Date(today)
+      from.setDate(today.getDate() - 29)
+      return { from: formatApiDate(from), to: formatApiDate(today) }
+    }
+    case "this-year":
+      return {
+        from: formatApiDate(new Date(year, 0, 1)),
+        to: formatApiDate(new Date(year, 11, 31)),
+      }
+    case "last-year":
+      return {
+        from: formatApiDate(new Date(year - 1, 0, 1)),
+        to: formatApiDate(new Date(year - 1, 11, 31)),
+      }
+    default:
+      return null
+  }
+}
 
 function PlanListPage() {
   const {
@@ -57,6 +96,8 @@ function PlanListPage() {
     visibleColumns,
   } = useCbmPlanList()
 
+  const [datePreset, setDatePreset] = React.useState("custom")
+
   const prevMutationSuccessRef = React.useRef(false)
 
   React.useEffect(() => {
@@ -94,10 +135,24 @@ function PlanListPage() {
     }
   }, [mutation.error, clearMutationResult])
 
+  const handleDatePresetChange = (preset: string) => {
+    setDatePreset(preset)
+    if (preset !== "custom") {
+      const range = presetToDateRange(preset)
+      if (range) {
+        void updateQuery({
+          executionDateFrom: range.from,
+          executionDateTo: range.to,
+        })
+      }
+    }
+  }
+
   const handleDateRangeChange = (
     from: string | undefined,
     to: string | undefined
   ) => {
+    setDatePreset("custom")
     void updateQuery({
       executionDateFrom: from,
       executionDateTo: to,
@@ -201,6 +256,7 @@ function PlanListPage() {
                   keyword={query.keyword}
                   executionDateFrom={query.executionDateFrom}
                   executionDateTo={query.executionDateTo}
+                  datePreset={datePreset}
                   status={query.status}
                   managingUnitId={query.managingUnitId}
                   locationId={query.locationId}
@@ -209,11 +265,15 @@ function PlanListPage() {
                   isLoading={isFilterOptionsLoading}
                   dateRangeError={validationErrors.executionDateRange}
                   onKeywordChange={handleKeywordChange}
+                  onDatePresetChange={handleDatePresetChange}
                   onDateRangeChange={handleDateRangeChange}
                   onStatusChange={handleStatusChange}
                   onUnitChange={handleUnitChange}
                   onLocationChange={handleLocationChange}
-                  onReset={() => void resetFilters()}
+                  onReset={() => {
+                    setDatePreset("custom")
+                    void resetFilters()
+                  }}
                 />
               )
             }
