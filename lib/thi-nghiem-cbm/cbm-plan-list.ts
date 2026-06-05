@@ -13,6 +13,8 @@ const dateTimeFormatter = new Intl.DateTimeFormat("en-GB", {
   hour12: false,
 })
 
+const CBM_PLAN_DEFAULT_PAGE_SIZE = 50
+
 function padDatePart(value: number) {
   return String(value).padStart(2, "0")
 }
@@ -105,6 +107,7 @@ function formatPaginationRange({
 }
 
 export {
+  CBM_PLAN_DEFAULT_PAGE_SIZE,
   formatApiDate,
   formatDisplayDate,
   formatDisplayDateTime,
