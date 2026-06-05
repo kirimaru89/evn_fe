@@ -6,17 +6,8 @@
       "start_timestamp": "2026-06-03T00:36:56.685Z",
       "end_timestamp": "2026-06-03T01:53:58.754Z",
       "markdown_size_bytes": 233310,
-      "provider": "codex",
-      "last_updated": "2026-06-05T02:31:09Z"
-    },
-    "019e91df-e763-7c41-8a96-2a490c5f2404": {
-      "user_message_count": 63,
-      "agent_message_count": 296,
-      "start_timestamp": "2026-06-04T09:04:15.265Z",
-      "end_timestamp": "2026-06-05T02:31:05.742Z",
-      "markdown_size_bytes": 609832,
-      "provider": "codex",
-      "last_updated": "2026-06-05T02:31:09Z"
+      "provider": "codex-cli",
+      "last_updated": "2026-06-04T09:01:32Z"
     },
     "a0f44dcb-e744-46c6-bb78-c932b04183a5": {
       "user_message_count": 12,
@@ -24,8 +15,8 @@
       "start_timestamp": "2026-06-01T23:20:01.970Z",
       "end_timestamp": "2026-06-01T23:42:48.588Z",
       "markdown_size_bytes": 561420,
-      "provider": "claude",
-      "last_updated": "2026-06-05T02:31:09Z"
+      "provider": "claude-code",
+      "last_updated": "2026-06-04T09:01:32Z"
     }
   }
 }
